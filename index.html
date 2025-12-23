@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="U2企画合同会社 - 遠隔地での長距離通信、ライブ配信、環境モニタリングシステムの企画・構築">
     <title>U2企画合同会社 | 遠隔映像・センサーソリューション</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
@@ -65,7 +69,14 @@
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         .service-card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.3s; }
         .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
-        .service-img { width: 100%; height: 500px; object-fit: cover; }
+
+        /* Adjusted image style to avoid excessive cropping */
+        .service-img {
+            width: 100%;
+            height: auto;           /* keep natural aspect ratio on desktop */
+            display: block;
+        }
+
         .service-content { padding: 25px; }
         .service-content h3 { margin-bottom: 15px; color: var(--primary-color); font-size: 1.3rem; }
         .service-content p { line-height: 1.8; color: #555; }
@@ -94,7 +105,7 @@
 
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 15px; padding: 1rem; }
-            nav { display: flex; gap: 15px; }
+            nav { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
             nav a { margin-left: 0; }
             .hero h1 { font-size: 1.8rem; }
             .hero p { font-size: 1rem; }
@@ -102,6 +113,19 @@
             .about-row { flex-direction: column; }
             .about-label { width: 100%; margin-bottom: 5px; }
             .contact-form { padding: 30px 20px; }
+
+            /* On mobile, prevent vertical cropping by constraining max-height
+               and showing full image using object-fit: contain inside a wrapper */
+            .service-card {
+                display: flex;
+                flex-direction: column;
+            }
+            .service-card img.service-img {
+                max-height: 260px;
+                width: 100%;
+                object-fit: contain;  /* show whole image, may add top/bottom bars */
+                background-color: #000; /* optional: gives a "letterbox" feel */
+            }
         }
     </style>
 </head>
@@ -174,23 +198,28 @@
         <div class="section-title">
             <h2>お問い合わせ</h2>
         </div>
-        <p class="contact-intro">1拠点からのスモールスタートや、技術的な検証（PoC）のご相談も歓迎です。<br>下記フォームよりお気軽にご連絡ください。</p>
+        <p class="contact-intro">
+            1拠点からのスモールスタートや、技術的な検証（PoC）のご相談も歓迎です。<br>
+            下記フォームよりお気軽にご連絡ください。
+        </p>
         <div class="contact-form">
-            <form action="#" method="post">
+            <!-- Formspree: replace YOUR_FORM_ID -->
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <div class="form-group">
                     <label for="name">お名前 <span style="color: red;">*</span></label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="お名前" required>
                 </div>
                 <div class="form-group">
                     <label for="email">メールアドレス <span style="color: red;">*</span></label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="_replyto" required>
                 </div>
                 <div class="form-group">
                     <label for="message">メッセージ <span style="color: red;">*</span></label>
-                    <textarea id="message" name="message" rows="6" required></textarea>
+                    <textarea id="message" name="メッセージ" rows="6" required></textarea>
                 </div>
+                <!-- Optional: subject field for Formspree -->
+                <input type="hidden" name="_subject" value="U2企画ホームページからのお問い合わせ">
                 <button type="submit" class="submit-btn">送信する</button>
-                <p class="form-note">※ 現在、フォームは準備中です。お急ぎの場合は直接メールにてご連絡ください。</p>
             </form>
         </div>
     </section>
