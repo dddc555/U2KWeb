@@ -73,13 +73,78 @@
         /* Adjusted image style to avoid excessive cropping */
         .service-img {
             width: 100%;
-            height: auto;           /* keep natural aspect ratio on desktop */
+            height: auto;
             display: block;
         }
 
         .service-content { padding: 25px; }
         .service-content h3 { margin-bottom: 15px; color: var(--primary-color); font-size: 1.3rem; }
         .service-content p { line-height: 1.8; color: #555; }
+
+        /* Case Studies - Collapsible */
+        #cases { background: #fff; }
+        .case-item {
+            background: var(--light-bg);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        .case-item details {
+            cursor: pointer;
+        }
+        .case-item summary {
+            padding: 20px 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: var(--light-bg);
+            border-left: 5px solid var(--accent-color);
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        .case-item summary:hover {
+            background: #e9ecef;
+        }
+        .case-item summary::-webkit-details-marker {
+            display: none;
+        }
+        .case-item summary::after {
+            content: '▼';
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            transition: transform 0.3s;
+        }
+        .case-item details[open] summary::after {
+            transform: rotate(180deg);
+        }
+        .case-content {
+            padding: 25px;
+            background: #fff;
+        }
+        .case-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: #555;
+        }
+        .youtube-embed {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+        }
+        .youtube-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
 
         /* About */
         #about { background: #fff; }
@@ -114,8 +179,6 @@
             .about-label { width: 100%; margin-bottom: 5px; }
             .contact-form { padding: 30px 20px; }
 
-            /* On mobile, prevent vertical cropping by constraining max-height
-               and showing full image using object-fit: contain inside a wrapper */
             .service-card {
                 display: flex;
                 flex-direction: column;
@@ -123,8 +186,12 @@
             .service-card img.service-img {
                 max-height: 260px;
                 width: 100%;
-                object-fit: contain;  /* show whole image, may add top/bottom bars */
-                background-color: #000; /* optional: gives a "letterbox" feel */
+                object-fit: contain;
+                background-color: #000;
+            }
+            .case-item summary {
+                font-size: 1rem;
+                padding: 15px 20px;
             }
         }
     </style>
@@ -138,6 +205,7 @@
         </div>
         <nav>
             <a href="#services">事業内容</a>
+            <a href="#cases">導入事例</a>
             <a href="#about">会社概要</a>
             <a href="#contact">お問い合わせ</a>
         </nav>
@@ -172,6 +240,60 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <section id="cases">
+        <div class="section-title">
+            <h2>導入事例</h2>
+        </div>
+        <p class="section-intro">実際の導入現場から、ライブ配信をご覧いただけます。クリックして展開してください。</p>
+
+        <!-- Case 1 -->
+        <div class="case-item">
+            <details>
+                <summary>事例1：山小屋青苔荘 ライブカメラ</summary>
+                <div class="case-content">
+                    <p>
+                        <strong>場所：</strong>長野県<br>
+                        <strong>用途：</strong>観光プロモーション・登山者向け情報提供<br>
+                        <strong>システム：</strong>Starlink + 4Kカメラ
+                    </p>
+                    <div class="youtube-embed">
+                        <!-- Replace YOUR_CHANNEL_ID_1 with actual YouTube channel ID -->
+                        <iframe 
+                            src="https://www.youtube.com/embed/live_stream?channel=UCrkREbRXzKdmqg1Btjdk1vA" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Case 2 -->
+        <div class="case-item">
+            <details>
+                <summary>事例2：株式会社ヤマテン　オフィスからの空模様</summary>
+                <div class="case-content">
+                    <p>
+                        <strong>場所：</strong>長野県<br>
+                        <strong>用途：</strong>雲形の確認、天気予報、研究<br>
+                        <strong>システム：</strong>気象センサー + 4Kズームカメラ
+                    </p>
+                    <div class="youtube-embed">
+                        <!-- Replace YOUR_CHANNEL_ID_2 with actual YouTube channel ID -->
+                        <iframe 
+                            src="https://www.youtube.com/embed/live_stream?channel=UCotG2fbKw4ua-vxRZnH2IVQ" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </details>
+        </div>
+
     </section>
 
     <section id="about">
@@ -217,7 +339,6 @@
                     <label for="message">メッセージ <span style="color: red;">*</span></label>
                     <textarea id="message" name="メッセージ" rows="6" required></textarea>
                 </div>
-                <!-- Optional: subject field for Formspree -->
                 <input type="hidden" name="_subject" value="U2企画ホームページからのお問い合わせ">
                 <button type="submit" class="submit-btn">送信する</button>
             </form>
