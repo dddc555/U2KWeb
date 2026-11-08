@@ -1,0 +1,156 @@
+/* Shared stylesheet for U2企画合同会社 legal pages (privacy / terms).
+   Mirrors the design tokens of index.html so the documents read as part of the site. */
+
+:root {
+    --primary-color: #000000;
+    --accent-color: #007AFF;
+    --text-color: #333;
+    --light-bg: #f8f9fa;
+    --border: #e3e6ea;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.9;
+    color: var(--text-color);
+    background: #fff;
+}
+
+/* Header — same shape as the top page */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.logo-area { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 1.2rem; color: var(--primary-color); text-decoration: none; }
+.logo-area img { height: 40px; }
+nav a { text-decoration: none; color: var(--text-color); margin-left: 20px; font-size: 0.9rem; transition: color 0.3s; }
+nav a:hover { color: var(--accent-color); }
+
+/* Document body */
+main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 24px 90px;
+}
+.doc-title {
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 14px;
+    margin-bottom: 12px;
+    font-size: 1.9rem;
+    color: var(--primary-color);
+}
+.doc-meta {
+    font-size: 0.85rem;
+    color: #777;
+    margin-bottom: 40px;
+}
+.lead {
+    background: var(--light-bg);
+    border-left: 5px solid var(--accent-color);
+    border-radius: 6px;
+    padding: 22px 26px;
+    margin-bottom: 44px;
+    font-size: 0.97rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    margin: 46px 0 14px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+}
+h3 {
+    font-size: 1.03rem;
+    margin: 26px 0 10px;
+    color: #222;
+}
+p { margin-bottom: 14px; }
+ul, ol { margin: 0 0 16px 1.5em; }
+li { margin-bottom: 6px; }
+a { color: var(--accent-color); }
+
+/* Section numbering */
+h2 .num {
+    display: inline-block;
+    min-width: 2.1em;
+    margin-right: 0.45em;
+    color: var(--accent-color);
+}
+
+/* Tables (third-party disclosure) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 24px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+th, td {
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+}
+th {
+    background: var(--light-bg);
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Definition-ish rows */
+dl { margin-bottom: 18px; }
+dt { font-weight: bold; margin-top: 12px; }
+dd { margin-left: 1.2em; }
+
+.note {
+    font-size: 0.88rem;
+    color: #666;
+    background: var(--light-bg);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 18px 0;
+}
+
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 0.9rem;
+}
+footer a { color: #fff; text-decoration: none; opacity: 0.85; }
+footer a:hover { opacity: 1; text-decoration: underline; }
+.footer-links { margin-bottom: 10px; }
+.footer-links a { margin: 0 10px; }
+.footer-links span { opacity: 0.4; }
+
+@media (max-width: 768px) {
+    header { flex-direction: column; gap: 15px; padding: 1rem; }
+    nav { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+    nav a { margin-left: 0; }
+    main { padding: 40px 18px 70px; }
+    .doc-title { font-size: 1.5rem; }
+    table { font-size: 0.82rem; }
+    th, td { padding: 8px; }
+    /* Stack the disclosure table on narrow screens */
+    table.stack thead { display: none; }
+    table.stack tr { display: block; border: 1px solid var(--border); margin-bottom: 12px; }
+    table.stack td { display: block; border: none; border-bottom: 1px solid var(--border); }
+    table.stack td:last-child { border-bottom: none; }
+    table.stack td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: bold;
+        color: #555;
+        font-size: 0.78rem;
+    }
+}
